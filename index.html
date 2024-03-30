@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div id="expense-tracker-page">
+        <h1>Expense Tracker</h1>
+        
+        <main>
+            <header>
+                <div>
+
+                    <h5>Total Balance</h5> 
+                    
+                    <div id="balance">$0.00</div>
+                    <img src="./expense.jpg">
+                </div>
+               
+                <div>
+                    <h5>Income</h5>
+                    <span id="income">$0.00</span>
+                </div>
+                <div>
+                    <h5>Expense</h5>
+                    <span id="expense">$0.00</span>
+                </div>
+            </header>
+
+            <section>
+                <h3>Transactions</h3>
+                <ul id="transactionList"></ul>
+                <div id="status"></div>
+            </section>
+
+            <section>
+                <h3>Add Transaction</h3>
+                <form id="transactionForm">
+                    <div>
+                        <label for="type">
+                            <input type="checkbox" name="type" id="type" />
+                            <div class="option">
+                                <span>Expense</span>
+                                <span>Income</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" required />
+                    </div>
+                    <div>
+                        <label for="amount">Amount</label>
+                        <input
+                            type="number"
+                            name="amount"
+                            value="0"
+                            min="0.01"
+                            step="0.01"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label for="date">Date</label>
+                        <input type="date" name="date" required />
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            
+    <button id="show-chart-btn">Show Data Chart</button>
+</div>
+
+<div id="data-chart-page" style="display: none;">
+  
+    <div style="width: 50%; margin: 0 auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+    <button id="back-to-tracker-btn">Back to Expense Tracker</button>
+</div>
+</section>
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="script.js"></script>
+    <script>
+    
+        const labels = ['Item1', 'Item2', 'Item3'];
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Expense',
+                backgroundColor: ['#ff0000', '#00ff00', '#0000ff'],
+                borderColor: ['#ff0000', '#00ff00', '#0000ff'],
+                data: [200, 300, 400]
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        // Button event listeners
+        document.getElementById('show-chart-btn').addEventListener('click', function() {
+            document.getElementById('expense-tracker-page').style.display = 'none';
+            document.getElementById('data-chart-page').style.display = 'block';
+        });
+
+        document.getElementById('back-to-tracker-btn').addEventListener('click', function() {
+            document.getElementById('expense-tracker-page').style.display = 'block';
+            document.getElementById('data-chart-page').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
